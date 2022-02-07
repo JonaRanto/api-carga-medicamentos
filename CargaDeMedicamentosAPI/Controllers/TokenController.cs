@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using CargaDeMedicamentosAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -27,24 +25,17 @@ namespace CargaDeMedicamentosAPI.Controllers
         [HttpPost("generate")]
         public ActionResult getToken()
         {
-            string user = "test";
-            string pass = "pass";
-            string[] roles = { "admin" };
-            return Ok(BuildToken(user, pass, roles, "1"));
+            string uid = "123";
+            return Ok(BuildToken(uid));
         }
 
-        private UserToken BuildToken(string user, string pass, string[] roles, string uid)
+        private UserToken BuildToken(string uid)
         {
             var claims = new List<Claim>
             {
                 new Claim("uid", uid),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
-
-            foreach (var rol in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, rol));
-            }
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT_KEY"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

@@ -21,15 +21,19 @@ namespace CargaDeMedicamentosAPI.Controllers
             _configuration = configuration;
         }
 
-
+        /// <summary>
+        /// Se obtiene un token de autenticación.
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("generate")]
         public ActionResult getToken()
         {
             string uid = "123";
-            return Ok(BuildToken(uid));
+            UserToken token = buildToken(uid);
+            return Ok(token);
         }
 
-        private UserToken BuildToken(string uid)
+        private UserToken buildToken(string uid)
         {
             var claims = new List<Claim>
             {

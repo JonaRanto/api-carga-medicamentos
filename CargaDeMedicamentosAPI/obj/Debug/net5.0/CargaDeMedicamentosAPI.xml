@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CargaDeMedicamentosAPI</name>
+    </assembly>
+    <members>
+        <member name="M:CargaDeMedicamentosAPI.Controllers.MedicamentosController.CargaIndividual(CargaDeMedicamentosAPI.Models.CargaIndividualInput)">
+            <summary>
+            Se realiza la carga individual mediante el identificador de la sucursal y el codigo TFC.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CargaDeMedicamentosAPI.Controllers.MedicamentosController.CargaMasiva(System.String,CargaDeMedicamentosAPI.Models.CargaMasivaInput)">
+            <summary>
+            Se realiza la carga masiva indicando el identificador de la sucursal y el archivo binario de la carga.
+            </summary>
+            <param name="idSucursal"></param>
+            <param name="cargaMasiva"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CargaDeMedicamentosAPI.Controllers.MedicamentosController.EstadoCarga(System.String)">
+            <summary>
+            Se obtiene el estado de una carga de un archivo mediante su identificador.
+            </summary>
+            <param name="idCarga"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CargaDeMedicamentosAPI.Controllers.MedicamentosController.ErrorCarga(System.String)">
+            <summary>
+            Se obtienen los errores de carga de un archivo mediante su identificador.
+            </summary>
+            <param name="idCarga"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CargaDeMedicamentosAPI.Controllers.TokenController.getToken">
+            <summary>
+            Se obtiene un token de autenticación.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CargaDeMedicamentosAPI.Constrollers.WeatherForecastController.Get">
+            <summary>
+            Consulta de pruebas.
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

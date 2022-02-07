@@ -23,6 +23,10 @@ namespace CargaDeMedicamentosAPI.Constrollers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Consulta de pruebas.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {

@@ -12,6 +12,8 @@ using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Reflection;
+using System.IO;
 
 namespace CargaDeMedicamentosAPI
 {
@@ -31,6 +33,9 @@ namespace CargaDeMedicamentosAPI
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CargaDeMedicamentosAPI", Version = "v1" });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -40,8 +45,7 @@ namespace CargaDeMedicamentosAPI
                      ValidateAudience = false,
                      ValidateLifetime = true,
                      ValidateIssuerSigningKey = true,
-                     IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(Configuration["JWT_KEY"])),
+                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_KEY"])),
                      ClockSkew = TimeSpan.Zero
                  });
         }

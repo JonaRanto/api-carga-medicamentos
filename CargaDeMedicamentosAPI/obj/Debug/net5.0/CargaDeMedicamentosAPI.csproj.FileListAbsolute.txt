@@ -34,3 +34,5 @@ C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\ne
 C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\CargaDeMedicamentosAPI.xml
+C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\obj\Debug\net5.0\CargaDeMedicamentosAPI.xml

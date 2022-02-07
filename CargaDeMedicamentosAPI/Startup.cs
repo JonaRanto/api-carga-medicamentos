@@ -9,6 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace CargaDeMedicamentosAPI
 {
@@ -29,6 +32,18 @@ namespace CargaDeMedicamentosAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CargaDeMedicamentosAPI", Version = "v1" });
             });
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+                 options.TokenValidationParameters = new TokenValidationParameters
+                 {
+                     ValidateIssuer = false,
+                     ValidateAudience = false,
+                     ValidateLifetime = true,
+                     ValidateIssuerSigningKey = true,
+                     IssuerSigningKey = new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(Configuration["JWT_KEY"])),
+                     ClockSkew = TimeSpan.Zero
+                 });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

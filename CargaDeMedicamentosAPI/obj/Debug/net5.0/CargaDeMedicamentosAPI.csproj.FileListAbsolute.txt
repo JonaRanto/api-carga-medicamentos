@@ -27,3 +27,10 @@ C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\obj\Debug\ne
 C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\obj\Debug\net5.0\ref\CargaDeMedicamentosAPI.dll
 C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\obj\Debug\net5.0\CargaDeMedicamentosAPI.pdb
 C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\obj\Debug\net5.0\CargaDeMedicamentosAPI.genruntimeconfig.cache
+C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll

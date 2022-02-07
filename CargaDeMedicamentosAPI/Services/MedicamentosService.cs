@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CargaDeMedicamentosAPI.Services
+﻿namespace CargaDeMedicamentosAPI.Services
 {
     public class MedicamentosService
     {

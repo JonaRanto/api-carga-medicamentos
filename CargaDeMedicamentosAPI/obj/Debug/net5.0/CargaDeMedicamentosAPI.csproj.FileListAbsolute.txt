@@ -1,4 +1,3 @@
-C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\appsettings.json
 C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\CargaDeMedicamentosAPI.exe
 C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\CargaDeMedicamentosAPI.deps.json
@@ -36,3 +35,10 @@ C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\ne
 C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\CargaDeMedicamentosAPI.xml
 C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\obj\Debug\net5.0\CargaDeMedicamentosAPI.xml
+C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\Serilog.dll
+C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\Serilog.Extensions.Logging.dll
+C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\Serilog.Extensions.Logging.File.dll
+C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\Serilog.Formatting.Compact.dll
+C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\Serilog.Sinks.Async.dll
+C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\Serilog.Sinks.File.dll
+C:\Users\Jonathan\git\api-carga-medicamentos\CargaDeMedicamentosAPI\bin\Debug\net5.0\Serilog.Sinks.RollingFile.dll

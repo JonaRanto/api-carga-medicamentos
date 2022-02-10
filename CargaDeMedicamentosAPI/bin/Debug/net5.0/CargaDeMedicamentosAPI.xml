@@ -8,6 +8,7 @@
             <summary>
             Se realiza la carga individual mediante el identificador de la sucursal y el codigo TFC.
             </summary>
+            <param name="cargaIndividual"></param>
             <returns></returns>
         </member>
         <member name="M:CargaDeMedicamentosAPI.Controllers.MedicamentosController.CargaMasiva(System.String,CargaDeMedicamentosAPI.Models.CargaMasivaInput)">

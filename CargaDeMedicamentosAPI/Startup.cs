@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Reflection;
 using System.IO;
+using Microsoft.Extensions.Logging;
 
 namespace CargaDeMedicamentosAPI
 {
@@ -47,8 +48,10 @@ namespace CargaDeMedicamentosAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddFile(Path.Combine(Configuration.GetValue<string>("LOGS_PATH")));
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using CargaDeMedicamentosAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace CargaDeMedicamentosAPI.Controllers
 {
@@ -8,6 +12,15 @@ namespace CargaDeMedicamentosAPI.Controllers
     [ApiController]
     public class MedicamentosController : ControllerBase
     {
+        private readonly IConfiguration _configuration;
+        private readonly ILogger _logger;
+
+        public MedicamentosController(IConfiguration configuration, ILogger logger)
+        {
+            _configuration = configuration;
+            _logger = logger;
+        }
+
         /// <summary>
         /// Se realiza la carga individual mediante el identificador de la sucursal y el codigo TFC.
         /// </summary>
@@ -17,7 +30,15 @@ namespace CargaDeMedicamentosAPI.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult<IEnumerable<CargaIndividualOutput>> CargaIndividual([FromQuery] CargaIndividualInput cargaIndividual)
         {
-            return Ok();
+            try
+            {
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
 
         /// <summary>
@@ -30,7 +51,15 @@ namespace CargaDeMedicamentosAPI.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult CargaMasiva([FromQuery] string idSucursal, [FromBody] CargaMasivaInput cargaMasiva)
         {
-            return Ok(cargaMasiva);
+            try
+            {
+                return Ok(cargaMasiva);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
 
         /// <summary>
@@ -42,7 +71,15 @@ namespace CargaDeMedicamentosAPI.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult EstadoCarga(string idCarga)
         {
-            return Ok(idCarga);
+            try
+            {
+                return Ok(idCarga);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
 
         /// <summary>
@@ -54,7 +91,15 @@ namespace CargaDeMedicamentosAPI.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult ErrorCarga(string idCarga)
         {
-            return Ok(idCarga);
+            try
+            {
+                return Ok(idCarga);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using CargaDeMedicamentosAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace CargaDeMedicamentosAPI.Controllers
@@ -15,10 +16,12 @@ namespace CargaDeMedicamentosAPI.Controllers
     public class TokenController : ControllerBase
     {
         private readonly IConfiguration _configuration;
+        private readonly ILogger _logger;
 
-        public TokenController(IConfiguration configuration)
+        public TokenController(IConfiguration configuration, ILogger logger)
         {
             _configuration = configuration;
+            _logger = logger;
         }
 
         /// <summary>
@@ -26,14 +29,22 @@ namespace CargaDeMedicamentosAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("generate")]
-        public ActionResult getToken()
+        public ActionResult<IEnumerable<UserToken>> GetToken()
         {
-            string uid = "123";
-            UserToken token = buildToken(uid);
-            return Ok(token);
+            try
+            {
+                string uid = "123";
+                UserToken token = BuildToken(uid);
+                return Ok(token);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
 
-        private UserToken buildToken(string uid)
+        private UserToken BuildToken(string uid)
         {
             var claims = new List<Claim>
             {

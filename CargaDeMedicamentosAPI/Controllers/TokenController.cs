@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using CargaDeMedicamentosAPI.Constants;
 using CargaDeMedicamentosAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace CargaDeMedicamentosAPI.Controllers
 {
-    [Route("api/token")]
+    [Route(InternalRoutes.TOKEN)]
     [ApiController]
     public class TokenController : ControllerBase
     {
@@ -28,7 +29,7 @@ namespace CargaDeMedicamentosAPI.Controllers
         /// Se obtiene un token de autenticación utilizando el uid del usuario.
         /// </summary>
         /// <returns></returns>
-        [HttpPost("generate")]
+        [HttpPost(RoutesPaths.TOKEN_GENERATE)]
         public ActionResult<IEnumerable<UserToken>> GetToken([FromQuery] string uid)
         {
             try
@@ -66,8 +67,8 @@ namespace CargaDeMedicamentosAPI.Controllers
 
             return new UserToken()
             {
-                token = new JwtSecurityTokenHandler().WriteToken(token),
-                expiration = expiration
+                Token = new JwtSecurityTokenHandler().WriteToken(token),
+                Expiration = expiration
             };
         }
     }

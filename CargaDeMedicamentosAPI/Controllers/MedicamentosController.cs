@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using CargaDeMedicamentosAPI.Constants;
 using CargaDeMedicamentosAPI.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace CargaDeMedicamentosAPI.Controllers
 {
-    [Route("api/medicamentos")]
+    [Route(InternalRoutes.MEDIC)]
     [ApiController]
     public class MedicamentosController : ControllerBase
     {
@@ -20,15 +20,15 @@ namespace CargaDeMedicamentosAPI.Controllers
         /// <summary>
         /// Se realiza la carga individual mediante el identificador de la sucursal y el codigo TFC.
         /// </summary>
-        /// <param name="cargaIndividual"></param>
+        /// <param name="CargaIndividual"></param>
         /// <returns></returns>
         [HttpPatch()]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public ActionResult<IEnumerable<CargaIndividualOutput>> CargaIndividual([FromQuery] CargaIndividualInput cargaIndividual)
+        public ActionResult<IEnumerable<CargaIndividualOutput>> CargaIndividual([FromQuery] CargaIndividualInput CargaIndividual)
         {
             try
             {
-                return Ok();
+                return Ok(CargaIndividual);
             }
             catch (Exception ex)
             {
@@ -40,16 +40,16 @@ namespace CargaDeMedicamentosAPI.Controllers
         /// <summary>
         /// Se realiza la carga masiva indicando el identificador de la sucursal y el archivo binario de la carga.
         /// </summary>
-        /// <param name="idSucursal"></param>
-        /// <param name="cargaMasiva"></param>
+        /// <param name="IdSucursal"></param>
+        /// <param name="CargaMasiva"></param>
         /// <returns></returns>
         [HttpPost()]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public ActionResult CargaMasiva([FromQuery] string idSucursal, [FromBody] CargaMasivaInput cargaMasiva)
+        public ActionResult CargaMasiva([FromQuery] string IdSucursal, [FromBody] CargaMasivaInput CargaMasiva)
         {
             try
             {
-                return Ok(cargaMasiva);
+                return Ok(CargaMasiva);
             }
             catch (Exception ex)
             {
@@ -61,15 +61,15 @@ namespace CargaDeMedicamentosAPI.Controllers
         /// <summary>
         /// Se obtiene el estado de una carga de un archivo mediante su identificador.
         /// </summary>
-        /// <param name="idCarga"></param>
+        /// <param name="IdCarga"></param>
         /// <returns></returns>
-        [HttpGet("estado")]
+        [HttpGet(RoutesPaths.MEDIC_STATE)]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public ActionResult EstadoCarga(string idCarga)
+        public ActionResult EstadoCarga(string IdCarga)
         {
             try
             {
-                return Ok(idCarga);
+                return Ok(IdCarga);
             }
             catch (Exception ex)
             {
@@ -81,15 +81,15 @@ namespace CargaDeMedicamentosAPI.Controllers
         /// <summary>
         /// Se obtienen los errores de carga de un archivo mediante su identificador.
         /// </summary>
-        /// <param name="idCarga"></param>
+        /// <param name="IdCarga"></param>
         /// <returns></returns>
-        [HttpGet("error")]
+        [HttpGet(RoutesPaths.MEDIC_ERRORS)]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public ActionResult ErrorCarga(string idCarga)
+        public ActionResult ErrorCarga(string IdCarga)
         {
             try
             {
-                return Ok(idCarga);
+                return Ok(IdCarga);
             }
             catch (Exception ex)
             {

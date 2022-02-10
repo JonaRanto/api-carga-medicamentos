@@ -2,12 +2,12 @@
 {
     public class CargaIndividualInput
     {
-        public int idSucursal { get; set; }
-        public int codigoTFC { get; set; }
+        public int IdSucursal { get; set; }
+        public int CodigoTFC { get; set; }
     }
     public class CargaIndividualOutput
     {
-        public int precio { get; set; }
-        public int stock { get; set; }
+        public int Precio { get; set; }
+        public int Stock { get; set; }
     }
 }

@@ -8,29 +8,29 @@
             <summary>
             Se realiza la carga individual mediante el identificador de la sucursal y el codigo TFC.
             </summary>
-            <param name="cargaIndividual"></param>
+            <param name="CargaIndividual"></param>
             <returns></returns>
         </member>
         <member name="M:CargaDeMedicamentosAPI.Controllers.MedicamentosController.CargaMasiva(System.String,CargaDeMedicamentosAPI.Models.CargaMasivaInput)">
             <summary>
             Se realiza la carga masiva indicando el identificador de la sucursal y el archivo binario de la carga.
             </summary>
-            <param name="idSucursal"></param>
-            <param name="cargaMasiva"></param>
+            <param name="IdSucursal"></param>
+            <param name="CargaMasiva"></param>
             <returns></returns>
         </member>
         <member name="M:CargaDeMedicamentosAPI.Controllers.MedicamentosController.EstadoCarga(System.String)">
             <summary>
             Se obtiene el estado de una carga de un archivo mediante su identificador.
             </summary>
-            <param name="idCarga"></param>
+            <param name="IdCarga"></param>
             <returns></returns>
         </member>
         <member name="M:CargaDeMedicamentosAPI.Controllers.MedicamentosController.ErrorCarga(System.String)">
             <summary>
             Se obtienen los errores de carga de un archivo mediante su identificador.
             </summary>
-            <param name="idCarga"></param>
+            <param name="IdCarga"></param>
             <returns></returns>
         </member>
         <member name="M:CargaDeMedicamentosAPI.Controllers.TokenController.GetToken(System.String)">

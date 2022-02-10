@@ -2,6 +2,6 @@
 {
     public class CargaMasivaInput
     {
-        public int binary { get; set; }
+        public int Binary { get; set; }
     }
 }

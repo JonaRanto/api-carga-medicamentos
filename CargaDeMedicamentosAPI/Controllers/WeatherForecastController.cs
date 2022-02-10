@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CargaDeMedicamentosAPI.Constants;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace CargaDeMedicamentosAPI.Constrollers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route(InternalRoutes.WF)]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

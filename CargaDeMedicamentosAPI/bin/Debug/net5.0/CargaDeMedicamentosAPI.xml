@@ -33,9 +33,9 @@
             <param name="idCarga"></param>
             <returns></returns>
         </member>
-        <member name="M:CargaDeMedicamentosAPI.Controllers.TokenController.getToken">
+        <member name="M:CargaDeMedicamentosAPI.Controllers.TokenController.GetToken(System.String)">
             <summary>
-            Se obtiene un token de autenticación.
+            Se obtiene un token de autenticación utilizando el uid del usuario.
             </summary>
             <returns></returns>
         </member>

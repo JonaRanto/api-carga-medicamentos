@@ -15,21 +15,21 @@ namespace CargaDeMedicamentosAPI.Controllers
     [ApiController]
     public class TokenController : ControllerBase
     {
-        public TokenController(IConfiguration configuration, ILogger logger)
+        public TokenController(IConfiguration configuration, ILogger<TokenController> logger)
         {
             Configuration = configuration;
             Logger = logger;
         }
         private IConfiguration Configuration { get; }
-        private ILogger Logger { get; }
+        private ILogger<TokenController> Logger { get; }
 
 
         /// <summary>
-        /// Se obtiene un token de autenticación.
+        /// Se obtiene un token de autenticación utilizando el uid del usuario.
         /// </summary>
         /// <returns></returns>
         [HttpPost("generate")]
-        public ActionResult<IEnumerable<UserToken>> GetToken(string uid)
+        public ActionResult<IEnumerable<UserToken>> GetToken([FromQuery] string uid)
         {
             try
             {

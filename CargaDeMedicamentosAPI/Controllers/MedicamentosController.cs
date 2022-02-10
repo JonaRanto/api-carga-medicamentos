@@ -11,11 +11,11 @@ namespace CargaDeMedicamentosAPI.Controllers
     [ApiController]
     public class MedicamentosController : ControllerBase
     {
-        public MedicamentosController(ILogger logger)
+        public MedicamentosController(ILogger<MedicamentosController> logger)
         {
             Logger = logger;
         }
-        private ILogger Logger { get; }
+        private ILogger<MedicamentosController> Logger { get; }
 
         /// <summary>
         /// Se realiza la carga individual mediante el identificador de la sucursal y el codigo TFC.

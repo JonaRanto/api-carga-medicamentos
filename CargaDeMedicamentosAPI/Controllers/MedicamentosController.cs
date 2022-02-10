@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using CargaDeMedicamentosAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -12,14 +11,11 @@ namespace CargaDeMedicamentosAPI.Controllers
     [ApiController]
     public class MedicamentosController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-        private readonly ILogger _logger;
-
-        public MedicamentosController(IConfiguration configuration, ILogger logger)
+        public MedicamentosController(ILogger logger)
         {
-            _configuration = configuration;
-            _logger = logger;
+            Logger = logger;
         }
+        private ILogger Logger { get; }
 
         /// <summary>
         /// Se realiza la carga individual mediante el identificador de la sucursal y el codigo TFC.
@@ -36,7 +32,7 @@ namespace CargaDeMedicamentosAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                Logger.LogError(ex.Message);
                 return BadRequest(ex.Message);
             }
         }
@@ -57,7 +53,7 @@ namespace CargaDeMedicamentosAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                Logger.LogError(ex.Message);
                 return BadRequest(ex.Message);
             }
         }
@@ -77,7 +73,7 @@ namespace CargaDeMedicamentosAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                Logger.LogError(ex.Message);
                 return BadRequest(ex.Message);
             }
         }
@@ -97,7 +93,7 @@ namespace CargaDeMedicamentosAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                Logger.LogError(ex.Message);
                 return BadRequest(ex.Message);
             }
         }

@@ -15,31 +15,30 @@ namespace CargaDeMedicamentosAPI.Controllers
     [ApiController]
     public class TokenController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-        private readonly ILogger _logger;
-
         public TokenController(IConfiguration configuration, ILogger logger)
         {
-            _configuration = configuration;
-            _logger = logger;
+            Configuration = configuration;
+            Logger = logger;
         }
+        private IConfiguration Configuration { get; }
+        private ILogger Logger { get; }
+
 
         /// <summary>
         /// Se obtiene un token de autenticación.
         /// </summary>
         /// <returns></returns>
         [HttpPost("generate")]
-        public ActionResult<IEnumerable<UserToken>> GetToken()
+        public ActionResult<IEnumerable<UserToken>> GetToken(string uid)
         {
             try
             {
-                string uid = "123";
                 UserToken token = BuildToken(uid);
                 return Ok(token);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                Logger.LogError(ex.Message);
                 return BadRequest(ex.Message);
             }
         }
@@ -52,7 +51,7 @@ namespace CargaDeMedicamentosAPI.Controllers
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT_KEY"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_KEY"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var expiration = DateTime.UtcNow.AddHours(4);

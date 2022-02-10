@@ -16,12 +16,12 @@ namespace CargaDeMedicamentosAPI.Constrollers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
-            _logger = logger;
+            Logger = logger;
         }
+
+        private ILogger<WeatherForecastController> Logger { get; }
 
         /// <summary>
         /// Consulta de pruebas.
@@ -30,14 +30,22 @@ namespace CargaDeMedicamentosAPI.Constrollers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            try
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+                var rng = new Random();
+                return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+                {
+                    Date = DateTime.Now.AddDays(index),
+                    TemperatureC = rng.Next(-20, 55),
+                    Summary = Summaries[rng.Next(Summaries.Length)]
+                })
+                .ToArray();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex.Message);
+                return null;
+            }
         }
     }
 }

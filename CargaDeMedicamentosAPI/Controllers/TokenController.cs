@@ -28,6 +28,7 @@ namespace CargaDeMedicamentosAPI.Controllers
         /// <summary>
         /// Se obtiene un token de autenticación utilizando el uid del usuario.
         /// </summary>
+        /// <param name="uid"></param>
         /// <returns></returns>
         [HttpPost(RoutesPaths.TOKEN_GENERATE)]
         public ActionResult<IEnumerable<UserToken>> GetToken([FromQuery] string uid)
@@ -44,6 +45,11 @@ namespace CargaDeMedicamentosAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Recibe un uid para generar y retornar un token.
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
         private UserToken BuildToken(string uid)
         {
             var claims = new List<Claim>

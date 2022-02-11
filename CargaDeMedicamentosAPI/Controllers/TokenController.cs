@@ -14,15 +14,16 @@ namespace CargaDeMedicamentosAPI.Controllers
 {
     [Route(InternalRoutes.TOKEN)]
     [ApiController]
+    [Produces("application/json")]
     public class TokenController : ControllerBase
     {
         public TokenController(IConfiguration configuration, ILogger<TokenController> logger)
         {
-            Configuration = configuration;
-            Logger = logger;
+            _configuration = configuration;
+            _logger = logger;
         }
-        private IConfiguration Configuration { get; }
-        private ILogger<TokenController> Logger { get; }
+        private IConfiguration _configuration { get; }
+        private ILogger<TokenController> _logger { get; }
 
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace CargaDeMedicamentosAPI.Controllers
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex.Message);
+                _logger.LogError(ex.Message);
                 return BadRequest(ex.Message);
             }
         }
@@ -58,7 +59,7 @@ namespace CargaDeMedicamentosAPI.Controllers
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_KEY"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT_KEY"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var expiration = DateTime.UtcNow.AddHours(4);

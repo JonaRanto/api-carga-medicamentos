@@ -9,13 +9,14 @@ namespace CargaDeMedicamentosAPI.Controllers
 {
     [Route(InternalRoutes.MEDIC)]
     [ApiController]
+    [Produces("application/json")]
     public class MedicamentosController : ControllerBase
     {
         public MedicamentosController(ILogger<MedicamentosController> logger)
         {
-            Logger = logger;
+            _logger = logger;
         }
-        private ILogger<MedicamentosController> Logger { get; }
+        private ILogger<MedicamentosController> _logger { get; }
 
         /// <summary>
         /// Se realiza la carga individual mediante el identificador de la sucursal y el codigo TFC.
@@ -32,7 +33,7 @@ namespace CargaDeMedicamentosAPI.Controllers
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex.Message);
+                _logger.LogError(ex.Message);
                 return BadRequest(ex.Message);
             }
         }
@@ -53,7 +54,7 @@ namespace CargaDeMedicamentosAPI.Controllers
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex.Message);
+                _logger.LogError(ex.Message);
                 return BadRequest(ex.Message);
             }
         }
@@ -73,7 +74,7 @@ namespace CargaDeMedicamentosAPI.Controllers
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex.Message);
+                _logger.LogError(ex.Message);
                 return BadRequest(ex.Message);
             }
         }
@@ -93,7 +94,7 @@ namespace CargaDeMedicamentosAPI.Controllers
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex.Message);
+                _logger.LogError(ex.Message);
                 return BadRequest(ex.Message);
             }
         }

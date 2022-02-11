@@ -8,35 +8,43 @@
             <summary>
             Se realiza la carga individual mediante el identificador de la sucursal y el codigo TFC.
             </summary>
-            <param name="CargaIndividual"></param>
+            <param name="cargaIndividual"></param>
             <returns></returns>
         </member>
         <member name="M:CargaDeMedicamentosAPI.Controllers.MedicamentosController.CargaMasiva(System.String,CargaDeMedicamentosAPI.Models.CargaMasivaInput)">
             <summary>
             Se realiza la carga masiva indicando el identificador de la sucursal y el archivo binario de la carga.
             </summary>
-            <param name="IdSucursal"></param>
-            <param name="CargaMasiva"></param>
+            <param name="idSucursal"></param>
+            <param name="cargaMasiva"></param>
             <returns></returns>
         </member>
         <member name="M:CargaDeMedicamentosAPI.Controllers.MedicamentosController.EstadoCarga(System.String)">
             <summary>
             Se obtiene el estado de una carga de un archivo mediante su identificador.
             </summary>
-            <param name="IdCarga"></param>
+            <param name="idCarga"></param>
             <returns></returns>
         </member>
         <member name="M:CargaDeMedicamentosAPI.Controllers.MedicamentosController.ErrorCarga(System.String)">
             <summary>
             Se obtienen los errores de carga de un archivo mediante su identificador.
             </summary>
-            <param name="IdCarga"></param>
+            <param name="idCarga"></param>
             <returns></returns>
         </member>
         <member name="M:CargaDeMedicamentosAPI.Controllers.TokenController.GetToken(System.String)">
             <summary>
             Se obtiene un token de autenticación utilizando el uid del usuario.
             </summary>
+            <param name="uid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CargaDeMedicamentosAPI.Controllers.TokenController.BuildToken(System.String)">
+            <summary>
+            Recibe un uid para generar y retornar un token.
+            </summary>
+            <param name="uid"></param>
             <returns></returns>
         </member>
         <member name="M:CargaDeMedicamentosAPI.Constrollers.WeatherForecastController.Get">

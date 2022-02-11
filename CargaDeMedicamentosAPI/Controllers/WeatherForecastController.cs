@@ -9,6 +9,7 @@ namespace CargaDeMedicamentosAPI.Constrollers
 {
     [ApiController]
     [Route(InternalRoutes.WF)]
+    [Produces("application/json")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -18,10 +19,10 @@ namespace CargaDeMedicamentosAPI.Constrollers
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
-            Logger = logger;
+            _logger = logger;
         }
 
-        private ILogger<WeatherForecastController> Logger { get; }
+        private ILogger<WeatherForecastController> _logger { get; }
 
         /// <summary>
         /// Consulta de pruebas.
@@ -43,7 +44,7 @@ namespace CargaDeMedicamentosAPI.Constrollers
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex.Message);
+                _logger.LogError(ex.Message);
                 return null;
             }
         }

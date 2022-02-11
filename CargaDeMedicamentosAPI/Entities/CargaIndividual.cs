@@ -1,4 +1,4 @@
-﻿namespace CargaDeMedicamentosAPI.Models
+﻿namespace CargaDeMedicamentosAPI.Entities
 {
     public class CargaIndividualInput
     {

@@ -4,14 +4,14 @@
         <name>CargaDeMedicamentosAPI</name>
     </assembly>
     <members>
-        <member name="M:CargaDeMedicamentosAPI.Controllers.MedicamentosController.CargaIndividual(CargaDeMedicamentosAPI.Models.CargaIndividualInput)">
+        <member name="M:CargaDeMedicamentosAPI.Controllers.MedicamentosController.CargaIndividual(CargaDeMedicamentosAPI.Entities.CargaIndividualInput)">
             <summary>
             Se realiza la carga individual mediante el identificador de la sucursal y el codigo TFC.
             </summary>
             <param name="cargaIndividual"></param>
             <returns></returns>
         </member>
-        <member name="M:CargaDeMedicamentosAPI.Controllers.MedicamentosController.CargaMasiva(System.String,CargaDeMedicamentosAPI.Models.CargaMasivaInput)">
+        <member name="M:CargaDeMedicamentosAPI.Controllers.MedicamentosController.CargaMasiva(System.String,CargaDeMedicamentosAPI.Entities.CargaMasivaInput)">
             <summary>
             Se realiza la carga masiva indicando el identificador de la sucursal y el archivo binario de la carga.
             </summary>

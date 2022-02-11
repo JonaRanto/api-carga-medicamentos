@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CargaDeMedicamentosAPI
+namespace CargaDeMedicamentosAPI.Entities
 {
     public class WeatherForecast
     {

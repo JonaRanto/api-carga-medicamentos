@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CargaDeMedicamentosAPI.Constants
+﻿namespace CargaDeMedicamentosAPI.Constants
 {
     public class RoutesPaths
     {
@@ -13,7 +8,7 @@ namespace CargaDeMedicamentosAPI.Constants
         // MEDICAMENTOS
         public const string MAIN_MEDIC = "medicamentos";
         public const string MEDIC_STATE = "estado";
-        public const string MEDIC_ERRORS = "error";
+        public const string MEDIC_ERROR = "error";
 
         // TOKEN
         public const string MAIN_TOKEN = "token";

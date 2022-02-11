@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using CargaDeMedicamentosAPI.Constants;
-using CargaDeMedicamentosAPI.Models;
+﻿using CargaDeMedicamentosAPI.Constants;
+using CargaDeMedicamentosAPI.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace CargaDeMedicamentosAPI.Controllers
 {
     [Route(InternalRoutes.TOKEN)]
     [ApiController]
-    [Produces("application/json")]
+    [Produces(ConfigControllers.DEFAULT_OUTPUT_FORMAT)]
     public class TokenController : ControllerBase
     {
         public TokenController(IConfiguration configuration, ILogger<TokenController> logger)

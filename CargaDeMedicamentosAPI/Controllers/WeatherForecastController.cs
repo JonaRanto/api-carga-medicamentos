@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CargaDeMedicamentosAPI.Constants;
+﻿using CargaDeMedicamentosAPI.Constants;
+using CargaDeMedicamentosAPI.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CargaDeMedicamentosAPI.Constrollers
 {
     [ApiController]
     [Route(InternalRoutes.WF)]
-    [Produces("application/json")]
+    [Produces(ConfigControllers.DEFAULT_OUTPUT_FORMAT)]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

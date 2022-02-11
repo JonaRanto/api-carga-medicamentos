@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using CargaDeMedicamentosAPI.Constants;
-using CargaDeMedicamentosAPI.Models;
+﻿using CargaDeMedicamentosAPI.Constants;
+using CargaDeMedicamentosAPI.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 
 namespace CargaDeMedicamentosAPI.Controllers
 {
     [Route(InternalRoutes.MEDIC)]
     [ApiController]
-    [Produces("application/json")]
+    [Produces(ConfigControllers.DEFAULT_OUTPUT_FORMAT)]
     public class MedicamentosController : ControllerBase
     {
         public MedicamentosController(ILogger<MedicamentosController> logger)
@@ -84,7 +84,7 @@ namespace CargaDeMedicamentosAPI.Controllers
         /// </summary>
         /// <param name="idCarga"></param>
         /// <returns></returns>
-        [HttpGet(RoutesPaths.MEDIC_ERRORS)]
+        [HttpGet(RoutesPaths.MEDIC_ERROR)]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult ErrorCarga(string idCarga)
         {

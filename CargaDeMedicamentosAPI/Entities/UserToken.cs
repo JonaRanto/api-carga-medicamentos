@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CargaDeMedicamentosAPI.Models
+namespace CargaDeMedicamentosAPI.Entities
 {
     public class UserToken
     {

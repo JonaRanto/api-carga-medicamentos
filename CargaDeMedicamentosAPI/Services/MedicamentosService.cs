@@ -43,6 +43,7 @@ namespace CargaDeMedicamentosAPI.Services
                 else
                 {
                     precioFarmacia.Stock = inputStock;
+                    precioFarmacia.FechaActualizacion = DateTime.Now;
                     precioFarmacia.FechaActualizacionStock = DateTime.Now;
                     changesFlag = true;
                 }

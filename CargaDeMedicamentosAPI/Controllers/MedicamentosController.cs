@@ -50,16 +50,17 @@ namespace CargaDeMedicamentosAPI.Controllers
         {
             try
             {
-                string uid = "26FB7924-7262-4151-8B0E-4DE09E205BFD";//GetUserId();
+                string uid = "0E6AB68E-E60E-4EBA-80AB-F7EF84AB350B";//GetUserId();
 
-                var persona = await Context.People.Where(p => p.UserId == uid).FirstOrDefaultAsync();
-                var medicamento = await Context.Emedicamentos.FindAsync(cargaIndividual.CodigoTFC);
-                var precioFarmacia = await Context.EprecioFarmacia.FindAsync(cargaIndividual.CodigoTFC, cargaIndividual.IdSucursal);
+                Person persona = Context.People.Where(p => p.UserId == uid).FirstOrDefault();
+                Emedicamento medicamento = await Context.Emedicamentos.FindAsync(cargaIndividual.CodigoTFC);
+                EprecioFarmacium precioFarmacia = await Context.EprecioFarmacia.FindAsync(cargaIndividual.CodigoTFC, cargaIndividual.IdSucursal);
                 ServiceOutput DbResponse = MedicamentosService.UpdatePrecioFarmacia(cargaIndividual, precioFarmacia);
 
                 // SI NO HAY ERRORES EN LA RESPUESTA, SE APLICAN LOS CAMBIOS EN LA BASE DE DATOS.
                 if (!DbResponse.Error)
                 {
+                    UpdateHistorialPrecio(precioFarmacia, medicamento, persona);
                     await Context.SaveChangesAsync();
                 }
 
@@ -135,9 +136,30 @@ namespace CargaDeMedicamentosAPI.Controllers
 
         private string GetUserId()
         {
+            // SE OBTIENE EL UID DE LA IDENTIDAD EN EL CONTEXTO HTTP
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
             string uid = identity.FindFirst("uid").Value;
             return uid;
+        }
+
+        private void UpdateHistorialPrecio(EprecioFarmacium eprecioFarmacium, Emedicamento emedicamento, Person person)
+        {
+            EhistorialPrecio ehistorialPrecio = new()
+            {
+                CodTfc = eprecioFarmacium.CodTfc,
+                CodFarmacia = eprecioFarmacium.CodFarmacia,
+                CodIsp = emedicamento.CodIsp,
+                CodGtin = eprecioFarmacium.CodigoBarraFramacia,
+                FechaActualizacion = eprecioFarmacium.FechaActualizacion,
+                Precio = eprecioFarmacium.Precio,
+                PrecioUnidad = eprecioFarmacium.Precio,
+                Stock = eprecioFarmacium.Stock,
+                StockMin = eprecioFarmacium.StockMin,
+                StockMax = eprecioFarmacium.StockMax,
+                TipoActualizacion = null,
+                PersonId = person.Id
+            };
+            Context.EhistorialPrecios.Add(ehistorialPrecio);
         }
     }
 }

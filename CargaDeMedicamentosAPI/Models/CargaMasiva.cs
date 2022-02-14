@@ -1,7 +1,9 @@
-﻿namespace CargaDeMedicamentosAPI.Models
+﻿using Microsoft.AspNetCore.Http;
+
+namespace CargaDeMedicamentosAPI.Models
 {
     public class CargaMasivaInput
     {
-        public int Binary { get; set; }
+        public IFormFile File { get; set; }
     }
 }

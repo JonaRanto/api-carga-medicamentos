@@ -7,6 +7,8 @@
 
         // MEDICAMENTOS
         public const string MAIN_MEDIC = "medicamentos";
+        public const string MEDIC_INDIVIDUAL_LOAD = "{sucursal_id}/{codigoTFC}";
+        public const string MEDIC_MASIVE_LOAD = "{sucursal_id}";
         public const string MEDIC_STATE = "estado";
         public const string MEDIC_ERROR = "error";
 

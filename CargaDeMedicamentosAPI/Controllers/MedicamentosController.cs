@@ -31,30 +31,24 @@ namespace CargaDeMedicamentosAPI.Controllers
         private ILogger<MedicamentosController> Logger { get; }
         private AppDbContext Context { get; }
 
-        [HttpGet("getAll")]
-        public async Task<ActionResult> ObtenerMedicamentos()
-        {
-            var response = await Context.Emedicamentos.FindAsync();
-            return Ok(response);
-        }
-
-
         /// <summary>
         /// Se realiza la carga individual mediante el identificador de la sucursal y el codigo TFC.
         /// </summary>
+        /// <param name="sucursal_id"></param>
+        /// <param name="codigoTFC"></param>
         /// <param name="cargaIndividual"></param>
         /// <returns></returns>
-        [HttpPatch()]
+        [HttpPatch(RoutesPaths.MEDIC_INDIVIDUAL_LOAD)]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<ActionResult<CargaIndividualOutput>> CargaIndividual([FromBody] CargaIndividualInput cargaIndividual)
+        public async Task<ActionResult<ServiceOutput>> CargaIndividual(string sucursal_id, string codigoTFC, [FromBody] CargaIndividualInput cargaIndividual)
         {
             try
             {
                 string uid = "0E6AB68E-E60E-4EBA-80AB-F7EF84AB350B";//GetUserId();
 
                 Person persona = Context.People.Where(p => p.UserId == uid).FirstOrDefault();
-                Emedicamento medicamento = await Context.Emedicamentos.FindAsync(cargaIndividual.CodigoTFC);
-                EprecioFarmacium precioFarmacia = await Context.EprecioFarmacia.FindAsync(cargaIndividual.CodigoTFC, cargaIndividual.IdSucursal);
+                Emedicamento medicamento = await Context.Emedicamentos.FindAsync(codigoTFC);
+                EprecioFarmacium precioFarmacia = await Context.EprecioFarmacia.FindAsync(codigoTFC, sucursal_id);
                 ServiceOutput DbResponse = MedicamentosService.UpdatePrecioFarmacia(cargaIndividual, precioFarmacia);
 
                 // SI NO HAY ERRORES EN LA RESPUESTA, SE APLICAN LOS CAMBIOS EN LA BASE DE DATOS.
@@ -62,9 +56,13 @@ namespace CargaDeMedicamentosAPI.Controllers
                 {
                     UpdateHistorialPrecio(precioFarmacia, medicamento, persona);
                     await Context.SaveChangesAsync();
+                    return Ok(DbResponse);
                 }
-
-                return Ok(DbResponse);
+                else
+                {
+                    return BadRequest(DbResponse);
+                }
+                
             }
             catch (Exception ex)
             {
@@ -76,16 +74,26 @@ namespace CargaDeMedicamentosAPI.Controllers
         /// <summary>
         /// Se realiza la carga masiva indicando el identificador de la sucursal y el archivo binario de la carga.
         /// </summary>
-        /// <param name="idSucursal"></param>
+        /// <param name="sucursal_id"></param>
         /// <param name="cargaMasiva"></param>
         /// <returns></returns>
-        [HttpPost()]
+        [HttpPost(RoutesPaths.MEDIC_MASIVE_LOAD)]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public ActionResult CargaMasiva([FromQuery] string idSucursal, [FromBody] CargaMasivaInput cargaMasiva)
+        public async Task<ActionResult<ServiceOutput>> CargaMasiva(string sucursal_id, [FromForm] CargaMasivaInput cargaMasiva)
         {
+            // ESTABLECER EL MISMO FORMATO DE SERIALIZACIÓN JSON
+            JsonSerializerOptions options = new() { WriteIndented = false };
+
             try
             {
-                return Ok(cargaMasiva);
+                ServiceOutput readedFile = MedicamentosService.ReadCSVFile(cargaMasiva);
+                List<DTOPrecioFarmacia> dtoPreciosFarmacia =
+                    JsonSerializer.Deserialize<List<DTOPrecioFarmacia>>(readedFile.Data, options);
+                if (readedFile.Error) return BadRequest(readedFile.Message);
+
+                MedicamentosService.CargaMasiva(sucursal_id, dtoPreciosFarmacia, Context);
+                
+                return Ok(dtoPreciosFarmacia);
             }
             catch (Exception ex)
             {

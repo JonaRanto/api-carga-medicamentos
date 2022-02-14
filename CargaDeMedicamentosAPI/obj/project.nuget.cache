@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "vmo7Ns/8iUjq2SGJDIaREDd21UGU7/zAtzyRF+UdXiGApBR1xaCPv2oVBcclFTkX1nm0R1rGmrsk+B+XKEGNsg==",
+  "dgSpecHash": "1hOdU7JQMgBNY2gRezORN0CSCwVGrrsPVzBxAQwdQNlBz6NAFFT2lrzt1kfxNd3TMYtmnb4oKwGVawOhxAVCZQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Jonathan\\git\\api-carga-medicamentos\\CargaDeMedicamentosAPI\\CargaDeMedicamentosAPI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Jonathan\\.nuget\\packages\\csvhelper\\27.2.1\\csvhelper.27.2.1.nupkg.sha512",
     "C:\\Users\\Jonathan\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Jonathan\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.13\\microsoft.aspnetcore.authentication.jwtbearer.5.0.13.nupkg.sha512",
     "C:\\Users\\Jonathan\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

@@ -1,5 +1,5 @@
 ﻿using CargaDeMedicamentosAPI.Constants;
-using CargaDeMedicamentosAPI.Entities;
+using CargaDeMedicamentosAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -19,11 +19,11 @@ namespace CargaDeMedicamentosAPI.Controllers
     {
         public TokenController(IConfiguration configuration, ILogger<TokenController> logger)
         {
-            _configuration = configuration;
-            _logger = logger;
+            this.Configuration = configuration;
+            this.Logger = logger;
         }
-        private IConfiguration _configuration { get; }
-        private ILogger<TokenController> _logger { get; }
+        private IConfiguration Configuration { get; }
+        private ILogger<TokenController> Logger { get; }
 
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace CargaDeMedicamentosAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                Logger.LogError(ex.Message);
                 return BadRequest(ex.Message);
             }
         }
@@ -59,7 +59,7 @@ namespace CargaDeMedicamentosAPI.Controllers
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT_KEY"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_KEY"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var expiration = DateTime.UtcNow.AddHours(4);

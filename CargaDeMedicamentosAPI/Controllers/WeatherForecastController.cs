@@ -1,5 +1,5 @@
 ﻿using CargaDeMedicamentosAPI.Constants;
-using CargaDeMedicamentosAPI.Entities;
+using CargaDeMedicamentosAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,10 +20,10 @@ namespace CargaDeMedicamentosAPI.Constrollers
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
-            _logger = logger;
+            this.Logger = logger;
         }
 
-        private ILogger<WeatherForecastController> _logger { get; }
+        private ILogger<WeatherForecastController> Logger { get; }
 
         /// <summary>
         /// Consulta de pruebas.
@@ -45,7 +45,7 @@ namespace CargaDeMedicamentosAPI.Constrollers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                Logger.LogError(ex.Message);
                 return null;
             }
         }

@@ -55,5 +55,27 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CargaDeMedicamentosAPI.Services.MedicamentosService.UpdatePrecioFarmacia(CargaDeMedicamentosAPI.Models.CargaIndividualInput,CargaDeMedicamentosAPI.Entities.EprecioFarmacium)">
+            <summary>
+            Actualización de precio farmacia individual
+            </summary>
+            <param name="cargaIndividual"></param>
+            <param name="precioFarmacia"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CargaDeMedicamentosAPI.Services.MedicamentosService.ReadCSVFile(CargaDeMedicamentosAPI.Models.CargaMasivaInput)">
+            <summary>
+            Leer el archivo csv
+            </summary>
+            <param name="cargaMasiva"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CargaDeMedicamentosAPI.Services.MedicamentosService.ValidateCSV(CargaDeMedicamentosAPI.Models.CargaMasivaInput)">
+            <summary>
+            Validar si el archivo tiene el formato csv
+            </summary>
+            <param name="cargaMasiva"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

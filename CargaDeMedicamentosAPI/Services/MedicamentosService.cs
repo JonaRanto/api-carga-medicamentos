@@ -1,5 +1,4 @@
 ﻿using CargaDeMedicamentosAPI.Constants;
-using CargaDeMedicamentosAPI.Context;
 using CargaDeMedicamentosAPI.Entities;
 using CargaDeMedicamentosAPI.Models;
 using CsvHelper;
@@ -7,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -82,39 +80,6 @@ namespace CargaDeMedicamentosAPI.Services
         }
 
         /// <summary>
-        /// Carga de precios masiva
-        /// </summary>
-        public static void CargaMasiva(string sucursal_id, List<DTOPrecioFarmacia> dtosPrecioFarmacia, AppDbContext Context)
-        {
-            List<DTOEstadoImportacion> estadosImportacion = new();
-
-            int wrongImport = 0;
-            int successImport = 0;
-
-            foreach (var precio in dtosPrecioFarmacia)
-            {
-                EprecioFarmacium eprecioFarmacium = Context.EprecioFarmacia.FirstOrDefault(p =>
-                p.CodTfc == precio.CodigoTFC && p.CodFarmacia == sucursal_id);
-
-                if (eprecioFarmacium == null)
-                {
-                    DTOEstadoImportacion estadoImportacion = new()
-                    {
-                        Success = false,
-                        Message = CargaMasivaMessages.NOT_FOUND,
-                        dtoPrecioFarmacia = precio
-                    };
-                    estadosImportacion.Add(estadoImportacion);
-                    wrongImport++;
-                }
-                else
-                {
-
-                }
-            }
-        }
-
-        /// <summary>
         /// Leer el archivo csv
         /// </summary>
         /// <param name="cargaMasiva"></param>
@@ -126,7 +91,7 @@ namespace CargaDeMedicamentosAPI.Services
             if (ValidateCSV(cargaMasiva))
             {
                 Stream stream = cargaMasiva.File.OpenReadStream();
-                List<DTOPrecioFarmacia> dtosPrecioFarmacia = new();
+                List<DTOPrecioFarmacia> dtoPreciosFarmacias = new();
                 using var reader = new StreamReader(stream);
                 using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
                 while (csv.Read())
@@ -139,19 +104,12 @@ namespace CargaDeMedicamentosAPI.Services
                     precioFarmacia.StockActual = csv.GetField(3);
                     precioFarmacia.CodigoBarra = csv.GetField(4);
                     precioFarmacia.DescripcionInterna = csv.GetField(5);
-                    dtosPrecioFarmacia.Add(precioFarmacia);
+                    dtoPreciosFarmacias.Add(precioFarmacia);
                 }
-
-                // CONFIGURAR JSONSERIALIZER PARA EVITAR ERRORES DE CICLICIDAD.
-                JsonSerializerOptions options = new()
-                {
-                    ReferenceHandler = ReferenceHandler.Preserve,
-                    WriteIndented = true
-                };
 
                 serviceOutput.Error = false;
                 serviceOutput.Message = ReadCSVFileMessages.READ_SUCCESSFUL;
-                serviceOutput.Data = JsonSerializer.Serialize(dtosPrecioFarmacia, options);
+                serviceOutput.Data = JsonSerializer.Serialize(dtoPreciosFarmacias);
             }
             else
             {

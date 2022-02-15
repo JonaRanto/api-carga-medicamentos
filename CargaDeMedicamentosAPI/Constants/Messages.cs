@@ -30,7 +30,7 @@ namespace CargaDeMedicamentosAPI.Constants
     public class CargaMasivaMessages
     {
         // SUCCESSFUL
-        public const string CARGA_SUCCESSFUL = "La carga masiva se ha realizado exitosamente.";
+        public const string CARGA_SUCCESSFUL = "La carga se ha realizado exitosamente.";
 
         // ERROR
         public const string CARGA_ERROR = "Ha ocurrido un error al intentar realizar la carga masiva.";

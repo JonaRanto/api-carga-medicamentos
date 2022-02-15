@@ -62,7 +62,6 @@ namespace CargaDeMedicamentosAPI.Controllers
                 {
                     return BadRequest(DbResponse);
                 }
-                
             }
             catch (Exception ex)
             {
@@ -81,19 +80,89 @@ namespace CargaDeMedicamentosAPI.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<ServiceOutput>> CargaMasiva(string sucursal_id, [FromForm] CargaMasivaInput cargaMasiva)
         {
-            // ESTABLECER EL MISMO FORMATO DE SERIALIZACIÓN JSON
-            JsonSerializerOptions options = new() { WriteIndented = false };
-
             try
             {
                 ServiceOutput readedFile = MedicamentosService.ReadCSVFile(cargaMasiva);
                 List<DTOPrecioFarmacia> dtoPreciosFarmacia =
-                    JsonSerializer.Deserialize<List<DTOPrecioFarmacia>>(readedFile.Data, options);
+                    JsonSerializer.Deserialize<List<DTOPrecioFarmacia>>(readedFile.Data);
                 if (readedFile.Error) return BadRequest(readedFile.Message);
 
-                MedicamentosService.CargaMasiva(sucursal_id, dtoPreciosFarmacia, Context);
-                
-                return Ok(dtoPreciosFarmacia);
+                string uid = "0E6AB68E-E60E-4EBA-80AB-F7EF84AB350B";//GetUserId();
+
+                Person person = Context.People.Where(p => p.UserId == uid).FirstOrDefault();
+
+                List<DTOEstadoImportacion> estadosImportacion = new();
+
+                int wrongImport = 0;
+                int successImport = 0;
+
+                foreach (var item in dtoPreciosFarmacia)
+                {
+                    EprecioFarmacium precioFarmacia = Context.EprecioFarmacia.FirstOrDefault(p =>
+                    p.CodTfc == item.CodigoTFC && p.CodFarmacia == sucursal_id);
+                    Emedicamento medicamento = await Context.Emedicamentos.FindAsync(item.CodigoTFC);
+
+                    if (precioFarmacia == null)
+                    {
+                        DTOEstadoImportacion estadoImportacion = new()
+                        {
+                            Success = false,
+                            Message = CargaMasivaMessages.NOT_FOUND,
+                            dtoPrecioFarmacia = item
+                        };
+                        estadosImportacion.Add(estadoImportacion);
+                        wrongImport++;
+                    }
+                    else
+                    {
+                        precioFarmacia.Precio = Convert.ToDecimal(item.NuevoPrecio);
+                        precioFarmacia.Stock = Convert.ToInt32(item.StockActual);
+                        precioFarmacia.CodigoBarraFramacia = item.CodigoBarra;
+                        precioFarmacia.DescripcionInternaFarmacia = item.DescripcionInterna;
+
+                        // ESTABLECER EL ESTADO DE LA ENTIDAD COMO MODIFICADO
+                        Context.Entry(precioFarmacia).State = EntityState.Modified;
+
+                        try
+                        {
+                            await Context.SaveChangesAsync();
+                            UpdateHistorialPrecio(precioFarmacia, medicamento, person);
+                            DTOEstadoImportacion estadoImportacion = new()
+                            {
+                                Success = true,
+                                Message = CargaMasivaMessages.CARGA_SUCCESSFUL,
+                                dtoPrecioFarmacia = item
+                            };
+                            estadosImportacion.Add(estadoImportacion);
+                            successImport++;
+                        }
+                        catch (Exception ex)
+                        {
+                            DTOEstadoImportacion estadoImportacion = new()
+                            {
+                                Success = false,
+                                Message = ex.Message,
+                                dtoPrecioFarmacia = item
+                            };
+                            estadosImportacion.Add(estadoImportacion);
+                            wrongImport++;
+                        }
+                    }
+                }
+
+                //// Almacena la carga en base de datos
+                //ECarga eCarga = CargaMasivaService.GenerateCargaMasiva(farmacia, precioFarmaciasDTO.Count, successItems, wrongItems, person);
+                //_context.Ecarga.Add(eCarga);
+                //await _context.SaveChangesAsync();
+
+
+                //// Almacena los registros con error ASYNC
+                //CargaMasivaService.SaveRegistrosFallidos(eCarga.Id, importacionFinalizacionDTOs, _context);
+                //await _context.SaveChangesAsync();
+
+                //return Ok(importacionFinalizacionDTOs);
+
+                return Ok(estadosImportacion);
             }
             catch (Exception ex)
             {
